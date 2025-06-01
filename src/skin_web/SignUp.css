@@ -1,0 +1,66 @@
+.signup-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: white;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+    .signup-form label {
+        display: flex;
+        flex-direction: column;
+        font-weight: 500;
+    }
+
+    .signup-form input[type="text"],
+    .signup-form input[type="email"],
+    .signup-form input[type="password"],
+    .signup-form input[type="date"] {
+        padding: 8px;
+        font-size: 14px;
+        border-radius: 4px;
+        border: 1px solid #999;
+    }
+
+    .signup-form .checkbox {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .signup-form button {
+        padding: 10px;
+        background-color: #004080;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .signup-form button:hover {
+            background-color: #0066cc;
+        }
+
+.switch-auth {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+    .switch-auth a {
+        color: #004080;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .switch-auth a:hover {
+            text-decoration: underline;
+        }
