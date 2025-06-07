@@ -1,5 +1,4 @@
-﻿// src/components/Header.jsx
-import React from 'react';
+﻿import React from 'react';
 import '../skin_web/Header.css';
 import { Link } from 'react-router-dom';
 

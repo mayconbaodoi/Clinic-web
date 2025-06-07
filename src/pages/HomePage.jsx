@@ -1,33 +1,108 @@
-﻿// src/pages/HomePage.jsx
-import React from 'react';
+﻿import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../skin_web/HomePage.css'; 
 
 export default function HomePage() {
+    const navigate = useNavigate();
+
+    const handleServiceClick = (serviceId) => {
+        navigate('/choose-type', { state: { service: serviceId } });
+    };
+
+    const services = [
+        {
+            id: 'customer',
+            title: 'DNA testing using a customer-provided sample'
+        },
+        {
+            id: 'facility',
+            title: 'DNA testing at medical facilities'
+        },
+        {
+            id: 'home',
+            title: "DNA tests with samples taken at the customer's home by medical staff"
+        }
+    ];
+
     return (
-        <main className="main-content">
-            <section id="about">
-                <h2>Giới thiệu</h2>
+        <main className="homepage-container">
+            <section className="section">
+                <h2 className="section-title">Introduction</h2>
                 <p>
-                    Chúng tôi là đơn vị hàng đầu trong lĩnh vực giám định ADN tại Việt Nam, với đội ngũ chuyên gia giàu kinh nghiệm và thiết bị hiện đại.
+                    We are the leading unit in the field of DNA testing in Vietnam, with a team of experienced experts and modern equipment.
                 </p>
             </section>
 
-            <section id="achievements">
-                <h2>Thành tựu</h2>
-                <ul>
-                    <li>Giải thưởng Khoa học Y tế Quốc gia 2023</li>
-                    <li>Hơn 10,000 ca giám định thành công</li>
-                    <li>Hợp tác cùng nhiều bệnh viện lớn trong cả nước</li>
+            <section className="section">
+                <h2 className="section-title">Achievements</h2>
+                <ul className="achievement-list">
+                    <li>National Health Science Awards 2023</li>
+                    <li>More than 10,000 successful appraisals</li>
+                    <li>Cooperating with many major hospitals nationwide</li>
                 </ul>
             </section>
 
-            <section id="services">
-                <h2>Dịch vụ ADN</h2>
-                <ul>
-                    <li>Giám định huyết thống cha - con</li>
-                    <li>Xác minh ADN hành chính & dân sự</li>
-                    <li>Giám định ADN cá thể (hài cốt, vụ án...)</li>
+            <section className="section">
+                <h2 className="section-title">DNA Services</h2>
+                <ul className="service-list">
+                    {services.map((service) => (
+                        <li
+                            key={service.id}
+                            onClick={() => handleServiceClick(service.id)}
+                            className="service-item"
+                        >
+                            {service.title}
+                        </li>
+                    ))}
                 </ul>
             </section>
+
+            {/* Phan nay de test page */ }
+            <button
+                onClick={() => navigate('/user-management')}
+                style={{
+                    marginTop: '2rem',
+                    padding: '0.5rem 1rem',
+                    backgroundColor: '#007bff',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer'
+                }}
+            >
+                Go to AdminPage (Test Only)
+            </button>
+
+            <button
+                onClick={() => navigate('/manager-panel')}
+                style={{
+                    marginTop: '2rem',
+                    padding: '0.5rem 1rem',
+                    backgroundColor: '#010bff',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer'
+                }}
+            >
+                Go to ManagerPage (Test Only)
+            </button>
+
+            <button
+                onClick={() => navigate('/staff')}
+                style={{
+                    marginTop: '2rem',
+                    padding: '0.5rem 1rem',
+                    backgroundColor: '#010bff',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer'
+                }}
+            >
+                Go to Staff (Test Only)
+            </button>
+            {/*end*/}
         </main>
     );
 }

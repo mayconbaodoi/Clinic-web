@@ -5,6 +5,16 @@ import Footer from './component/Footer';
 import HomePage from './pages/HomePage';
 import SignUp from './pages/SignUp'; 
 import SignIn from './pages/SignIn';
+import ChooseType from './pages/ChooseType';
+import MedicalFacility from './pages/MedicalFacility';
+import HomeSampling from './pages/HomeSampling';
+import SendSampling from './pages/SendSampling';
+/*Phan duoi la de test page*/ 
+import UserManagement from './pages/UserManag';
+import ManagerPanel from './pages/ManagerPanel';
+import Staff from './pages/Staff';
+/*end */
+
 
 function App() {
     return (
@@ -14,7 +24,15 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/signup" element={<SignUp />} />
-                <Route path="/signin" element={<SignIn /> } />
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/choose-type" element={<ChooseType />} />
+                <Route path="/medical-facility" element={<MedicalFacility />} />
+                <Route path="/home-sampling" element={<HomeSampling />} />
+                <Route path="/send-sampling" element={<SendSampling />} />
+                {/* phan duoi la de test page */}
+                <Route path="/user-management" element={<UserManagement />} />
+                <Route path="/manager-panel" element={<ManagerPanel />} />
+                <Route path="/staff" element={<Staff /> } />
             </Routes>
 
             <Footer />
