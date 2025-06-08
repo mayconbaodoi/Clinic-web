@@ -72,22 +72,23 @@ export default function HomePage() {
                     <div className="pricing-card">
                         <div className="price">1.500.000đ</div>
                         <div className="old-price">1.999.000đ/mẫu</div>
-                        <div className="title">GÓI XÉT NGHIỆM ADN TỰ NGUYỆN</div>
+                        <div className="title">GÓI XÉT NGHIỆM ADN DÂN SỰ</div>
                         <div className="desc">"Là xét nghiệm ADN dân sự, tự nguyện với mục đích giải tỏa nghi ngờ, xác định mối quan hệ giữa các cá nhân"</div>
                         <ul>
                             <li>Trả kết quả sau 2 - 3 ngày.</li>
                             <li>Chính xác 99,99999998%.</li>
                             <li className="fail">Không dùng cho mục đích pháp lý.</li>
                             <li>Thủ tục đơn giản / dễ thực hiện.</li>
-                            <li>Thu mẫu tại nhà / trung tâm.</li>
+                            <li>Thu mẫu tại trung tâm.</li>
                             <li>Bảo mật bằng hệ thống mã vạch.</li>
                             <li>Thanh toán tiện lợi.</li>
                             <li>Bảo hiểm kết quả giá trị cao.</li>
                             <li>Tổng đài hỗ trợ 24/7.</li>
                         </ul>
-                        <button className="more-btn">XEM THÊM</button>
+                        <button className="more-btn" onClick={() => navigate('/send-sampling')}>XEM THÊM</button>
                     </div>
-                    <div className="pricing-card highlight">
+
+                    <div className="pricing-card">
                         <div className="price">2.000.000đ</div>
                         <div className="old-price">2.499.000đ/mẫu</div>
                         <div className="title">GÓI XÉT NGHIỆM ADN HÀNH CHÍNH</div>
@@ -97,31 +98,32 @@ export default function HomePage() {
                             <li>Chính xác 99,99999998%.</li>
                             <li>Có giá trị pháp lý (dùng mãi mãi).</li>
                             <li>Thủ tục đơn giản / dễ thực hiện.</li>
-                            <li>Thu mẫu tại nhà / trung tâm.</li>
+                            <li>Thu mẫu tại trung tâm.</li>
                             <li>Bảo mật bằng hệ thống mã vạch.</li>
                             <li>Thanh toán tiện lợi.</li>
                             <li>Bảo hiểm kết quả giá trị cao.</li>
                             <li>Tổng đài hỗ trợ 24/7.</li>
                         </ul>
-                        <button className="more-btn highlight">XEM THÊM</button>
+                        <button className="more-btn" onClick={() => navigate('/medical-facility')}>XEM THÊM</button>
                     </div>
+
                     <div className="pricing-card">
                         <div className="price">20.000.000đ</div>
                         <div className="old-price">23.999.000đ/gói</div>
-                        <div className="title">GÓI XÉT NGHIỆM ADN THAI NHI</div>
+                        <div className="title">GÓI XÉT NGHIỆM ADN TẠI NHÀ</div>
                         <div className="desc">"Giúp xác định được mối quan hệ cha con từ khi còn trong bụng mẹ, không xâm lấn nên rất an toàn cho mẹ bầu"</div>
                         <ul>
                             <li>Trả kết quả sau 5 - 7 ngày.</li>
                             <li>Chính xác &gt;99,9999%.</li>
-                            <li>Thực hiện từ tuần thai thứ 7.</li>
                             <li>Thủ tục đơn giản / dễ thực hiện.</li>
                             <li>Thu mẫu tại nhà / trung tâm.</li>
                             <li>Bảo mật bằng hệ thống mã vạch.</li>
                             <li>Thanh toán tiện lợi.</li>
                             <li>Bảo hiểm kết quả giá trị cao.</li>
                             <li>Tổng đài hỗ trợ 24/7.</li>
+                            <li></li>
                         </ul>
-                        <button className="more-btn">XEM THÊM</button>
+                        <button className="more-btn" onClick={() => navigate('/home-sampling')}>XEM THÊM</button>
                     </div>
                 </div>
             </section>
