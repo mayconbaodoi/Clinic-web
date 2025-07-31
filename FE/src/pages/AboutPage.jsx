@@ -7,7 +7,7 @@ function About() {
             {/* 1. Giới thiệu chung */}
             <section className="about-intro">
                 <h1>GIỚI THIỆU TRUNG TÂM XÉT NGHIỆM GENLAB</h1>
-                <p>Trung tâm xét nghiệm GENLAB VIETNAM được thành lập ngày 09 tháng 10 năm 2022, là đơn vị tiên phong trong lĩnh vực xét nghiệm ADN với đội ngũ chuyên gia hàng đầu và công nghệ hiện đại. Chúng tôi cam kết mang lại kết quả chính xác, bảo mật và dịch vụ tận tâm nhất cho khách hàng trên toàn quốc.</p>
+                <p>Trung tâm xét nghiệm GENLAB VIETNAM được thành lập ngày 07 tháng 10 năm 2022, là đơn vị tiên phong trong lĩnh vực xét nghiệm ADN với đội ngũ chuyên gia hàng đầu và công nghệ hiện đại. Chúng tôi cam kết mang lại kết quả chính xác, bảo mật và dịch vụ tận tâm nhất cho khách hàng trên toàn quốc.</p>
                 <table className="about-info-table">
                     <tbody>
                         <tr><td>Tên thương hiệu</td><td>GENLAB VIETNAM</td></tr>
