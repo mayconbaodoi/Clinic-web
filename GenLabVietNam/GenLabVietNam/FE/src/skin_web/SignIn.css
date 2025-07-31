@@ -1,0 +1,110 @@
+.signin-container {
+    max-width: 400px;
+    margin: 80px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.signin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+    .signin-form label {
+        display: flex;
+        flex-direction: column;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .signin-form input {
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #aaa;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .signin-form button {
+        padding: 12px;
+        background-color: #004080;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+        .signin-form button:hover {
+            background-color: #003060;
+        }
+
+.switch-auth {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+    .switch-auth a {
+        color: #004080;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .switch-auth a:hover {
+            text-decoration: underline;
+        }
+
+.google-login-container {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.google-login-container > div {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+}
+
+/* Forgot Password Link */
+.forgot-password-link {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.forgot-password-btn {
+    color: #004080;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.forgot-password-btn:hover {
+    color: #003060;
+    text-decoration: underline;
+}
+
+/* Error Message */
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #f5c6cb;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #c3e6cb;
+}
