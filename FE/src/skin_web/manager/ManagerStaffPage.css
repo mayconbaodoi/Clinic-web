@@ -1,0 +1,71 @@
+.staff-container {
+  padding: 2rem;
+  background-color: #f2f6fc;
+  font-family: Arial, sans-serif;
+}
+
+.staff-container h2 {
+  text-align: center;
+  color: #2c3e50;
+}
+
+.staff-form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.staff-form input,
+.staff-form select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.staff-form button {
+  grid-column: span 3;
+  padding: 10px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.staff-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.staff-table th,
+.staff-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.staff-table th {
+  background-color: #ecf0f1;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 5px 10px;
+  margin-right: 6px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #27ae60;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+}
