@@ -288,14 +288,21 @@ function ManagerAccountPage() {
               {/* === FIX: So sánh với 'ON' viết hoa === */}
               <td>{acc.Status === "ON" ? "Hoạt động" : "Đã khóa"}</td>
               <td>
-                <button onClick={() => handleEdit(acc)}>Sửa</button>
-                <button
-                  className={acc.Status === "ON" ? "lock" : ""}
-                  // === FIX: Truyền đúng Account_ID và Status ===
-                  onClick={() => handleToggleStatus(acc.Account_ID, acc.Status)}
-                >
-                  {acc.Status === "ON" ? "Khóa" : "Mở khóa"}
-                </button>
+                <div className="action-buttons">
+                  {" "}
+                  {/* <== Bọc các nút trong div này */}
+                  <button className="edit-btn" onClick={() => handleEdit(acc)}>
+                    Sửa
+                  </button>
+                  <button
+                    className={acc.Status === "ON" ? "lock-btn" : "unlock-btn"}
+                    onClick={() =>
+                      handleToggleStatus(acc.Account_ID, acc.Status)
+                    }
+                  >
+                    {acc.Status === "ON" ? "Khóa" : "Mở khóa"}
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

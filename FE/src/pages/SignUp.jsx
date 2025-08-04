@@ -15,10 +15,9 @@ export default function RegisterForm() {
     phone: "",
     cccd: "",
   });
-
   const [message, setMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
-  const [toastType, setToastType] = useState("success"); // 'success' | 'error'
+  const [toastType, setToastType] = useState("success");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -36,7 +35,6 @@ export default function RegisterForm() {
       setMessage(res.data.message || "Đăng ký thành công!");
       setToastType("success");
       setShowToast(true);
-      // Chuyển sang trang nhập OTP, truyền email và password để tự động đăng nhập sau này
       setTimeout(() => {
         setShowToast(false);
         navigate("/otp", { state: { email: form.email, password: form.password } });
@@ -54,65 +52,84 @@ export default function RegisterForm() {
 
   return (
     <div className="signup-container">
-      <h2>Đăng ký tài khoản</h2>
+      <h2 className="form-title">Đăng ký tài khoản</h2>
       <form onSubmit={handleSubmit} className="signup-form">
+        <label htmlFor="username">Tên đăng nhập</label>
         <input
           type="text"
           name="username"
+          id="username"
           placeholder="Tên đăng nhập"
           onChange={handleChange}
           required
         />
+        <label htmlFor="password">Mật khẩu</label>
         <input
           type="password"
           name="password"
+          id="password"
           placeholder="Mật khẩu"
           onChange={handleChange}
           required
         />
+        <label htmlFor="email">Email</label>
         <input
           type="email"
           name="email"
+          id="email"
           placeholder="Email"
           onChange={handleChange}
           required
         />
+        <label htmlFor="name">Họ tên</label>
         <input
           type="text"
           name="name"
+          id="name"
           placeholder="Họ tên"
           onChange={handleChange}
           required
         />
-        <select name="gender" onChange={handleChange} required>
+        <label htmlFor="gender">Giới tính</label>
+        <select name="gender" id="gender" onChange={handleChange} required>
           <option value="">Giới tính</option>
           <option value="Nam">Nam</option>
           <option value="Nữ">Nữ</option>
         </select>
+        <label htmlFor="dob">Ngày sinh</label>
         <input
           type="date"
           name="dob"
+          id="dob"
           placeholder="Ngày sinh"
           onChange={handleChange}
           required
+          max={new Date().toISOString().split("T")[0]}
+          min={new Date(new Date().setFullYear(new Date().getFullYear() - 100)).toISOString().split("T")[0]}
         />
+        <label htmlFor="address">Địa chỉ</label>
         <input
           type="text"
           name="address"
+          id="address"
           placeholder="Địa chỉ"
           onChange={handleChange}
           required
         />
+        <label htmlFor="phone">Số điện thoại</label>
         <input
           type="text"
           name="phone"
+          id="phone"
           placeholder="Số điện thoại"
           onChange={handleChange}
           required
         />
+        <label htmlFor="cccd">CCCD</label>
         <input
           type="text"
           name="cccd"
+          id="cccd"
           placeholder="CCCD"
           onChange={handleChange}
           required
@@ -122,9 +139,7 @@ export default function RegisterForm() {
       {message && !showToast && <p>{message}</p>}
       {showToast && (
         <div
-          className={`toast-success${
-            toastType === "error" ? " toast-error" : ""
-          }`}
+          className={`toast-success${toastType === "error" ? " toast-error" : ""}`}
         >
           {message}
         </div>

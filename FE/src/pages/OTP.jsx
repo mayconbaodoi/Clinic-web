@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import '../skin_web/OTP.css';
 
 export default function OTPVerify() {
   const [otp, setOtp] = useState("");
@@ -30,7 +31,6 @@ export default function OTPVerify() {
         username: email,
         password: location.state?.password || ""
       });
-      // Lưu token và user info nếu cần
       localStorage.setItem("token", loginRes.data.token);
       localStorage.setItem("user", JSON.stringify(loginRes.data.user));
       setTimeout(() => {
@@ -46,8 +46,8 @@ export default function OTPVerify() {
 
   return (
     <div className="otp-container">
-      <h2>Xác thực OTP</h2>
-      <form onSubmit={handleSubmit} className="otp-form">
+      <h2 className="form-title">Xác thực OTP</h2>
+      <form onSubmit={handleSubmit} className="otp-form" autoComplete="off">
         <input
           type="text"
           name="otp"
@@ -55,8 +55,12 @@ export default function OTPVerify() {
           value={otp}
           onChange={e => setOtp(e.target.value)}
           required
+          maxLength={8}
+          style={{ letterSpacing: '2px', textAlign: 'center', fontWeight: 600 }}
         />
-        <button type="submit" disabled={loading}>{loading ? "Đang xác thực..." : "Xác thực"}</button>
+        <button type="submit" disabled={loading} style={{ marginTop: 8 }}>
+          {loading ? "Đang xác thực..." : "Xác thực"}
+        </button>
       </form>
       {message && (
         <div className={`toast-success${toastType === "error" ? " toast-error" : ""}`}>{message}</div>

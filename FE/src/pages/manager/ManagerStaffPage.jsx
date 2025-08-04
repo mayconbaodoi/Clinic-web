@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import "../../skin_web/admin/ManagerAccountPage.css"; // Tạm thời dùng chung CSS
+import "../../skin_web/manager/ManagerStaffPage.css"; // Tạm thời dùng chung CSS
 
 const API_URL = "http://localhost:3001/api/manager/staff";
 
@@ -256,13 +256,24 @@ function ManagerStaffPage() {
               <td>{staff.INFORMATION?.Phone || "—"}</td>
               <td>{staff.Status === "ON" ? "Hoạt động" : "Đã khóa"}</td>
               <td>
-                <button onClick={() => handleEdit(staff)}>Sửa</button>
-                <button
-                  className={staff.Status === "ON" ? "lock" : ""}
-                  onClick={() => handleToggleStatus(staff.Account_ID)}
-                >
-                  {staff.Status === "ON" ? "Khóa" : "Kích hoạt"}
-                </button>
+                {/* Bọc các nút trong div này */}
+                <div className="action-buttons">
+                  {/* Nút Sửa */}
+                  <button
+                    className="edit-btn"
+                    onClick={() => handleEdit(staff)}
+                  >
+                    Sửa
+                  </button>
+
+                  {/* Nút Khóa/Kích hoạt */}
+                  <button
+                    className="status-btn" // Gán class chung này
+                    onClick={() => handleToggleStatus(staff.Account_ID)}
+                  >
+                    {staff.Status === "ON" ? "Khóa" : "Kích hoạt"}
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

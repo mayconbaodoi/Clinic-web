@@ -46,7 +46,18 @@ const Header = () => {
                         </div>
                     </div>
                     <Link to="/price" className="nav-link">BẢNG GIÁ</Link>
+                    <Link to="/term" className="nav-link">CHÍNH SÁCH & ĐIỀU KHOẢN</Link>
 
+                    {/* Điều hướng dashboard theo role */}
+                    {user && user.role === 'Manager' && (
+                        <Link to="/manager" className="nav-link">MANAGER</Link>
+                    )}
+                    {user && user.role === 'Staff' && (
+                        <Link to="/staff" className="nav-link">STAFF</Link>
+                    )}
+                    {user && user.role === 'Admin' && (
+                        <Link to="/admin" className="nav-link">ADMIN</Link>
+                    )}
                 </div>
                 <div className="header-account-menu">
                     {user ? (
