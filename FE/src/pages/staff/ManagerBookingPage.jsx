@@ -11,6 +11,7 @@ function ManagerBookingPage() {
   const [uploadingId, setUploadingId] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [testResult, setTestResult] = useState(""); // Thêm state cho kết quả quan hệ huyết thống
   const [formData, setFormData] = useState({
     Booking_Status: "",
     AppointmentDate: "",
@@ -118,6 +119,7 @@ function ManagerBookingPage() {
   const handleEdit = (booking) => {
     setEditId(booking.Booking_ID);
     setUploadingId(null);
+    setTestResult(""); // Reset kết quả quan hệ huyết thống
     // Nếu trạng thái booking là 'Hoàn tất', luôn set Booking_Status là 'Hoàn tất' vào formData
     setFormData({
       Booking_Status: booking.Booking_Status === 'Hoàn tất' ? 'Hoàn tất' : booking.Booking_Status,
@@ -142,7 +144,7 @@ function ManagerBookingPage() {
       });
     } else if (name === "Shipping_Status" && value === "Đã gửi kết quả") {
       setFailCount((prev) => ({ ...prev, [editId]: 0 }));
-      
+
       // Khi trạng thái vận chuyển là 'Đã gửi kết quả', giữ nguyên giá trị hiện tại của các trường bị khóa
       // Không cần thay đổi gì thêm vì các trường sẽ bị disabled
     }
@@ -171,17 +173,17 @@ function ManagerBookingPage() {
     try {
       let isSentKit = false;
       let isStaffHome = false;
-      
+
       // Tạo payload để gửi lên server, loại bỏ các trường bị khóa
       const createPayload = () => {
         const payload = { ...formData, Shipping_Status: formData.Shipping_Status || "Không có" };
-        
+
         // Nếu trạng thái vận chuyển là 'Đã gửi kết quả', loại bỏ các trường bị khóa
         if (formData.Shipping_Status === 'Đã gửi kết quả') {
           delete payload.ReceiveDate;
           delete payload.ReceiveResult;
         }
-        
+
         return payload;
       };
       // Nếu có file ảnh check-in thì upload trước
@@ -227,7 +229,7 @@ function ManagerBookingPage() {
       if (formData.Checkin_Status === 'Không đến') {
         const payload = createPayload();
         payload.Booking_Status = 'Đã hủy';
-        
+
         await axios.put(
           `http://localhost:3001/api/staff/booking/${editId}`,
           payload,
@@ -243,7 +245,7 @@ function ManagerBookingPage() {
         // Dịch vụ tự lấy mẫu tại nhà: cập nhật thành "Đã gửi kit"
         const payload = createPayload();
         payload.Booking_Status = "Đã gửi kit";
-        
+
         await axios.put(
           `http://localhost:3001/api/staff/booking/${editId}`,
           payload,
@@ -254,7 +256,7 @@ function ManagerBookingPage() {
         // Dịch vụ nhân viên y tế đến nhà: cập nhật thành "Nhân viên đã đến"
         const payload = createPayload();
         payload.Booking_Status = "Nhân viên đã đến";
-        
+
         await axios.put(
           `http://localhost:3001/api/staff/booking/${editId}`,
           payload,
@@ -265,7 +267,7 @@ function ManagerBookingPage() {
         // Các dịch vụ khác: chỉ gửi Booking_Status nếu thực sự thay đổi
         const booking = bookings.find(b => b.Booking_ID === editId);
         const payload = createPayload();
-        
+
         // Nếu trạng thái booking trong DB là 'Hoàn tất', luôn giữ nguyên 'Hoàn tất'
         if (booking && booking.Booking_Status === 'Hoàn tất') {
           payload.Booking_Status = 'Hoàn tất';
@@ -273,7 +275,7 @@ function ManagerBookingPage() {
           // Không gửi Booking_Status nếu không đổi
           delete payload.Booking_Status;
         }
-        
+
         // Không gửi Booking_Status nếu chỉ thay đổi Shipping_Status
         if (
           Object.keys(formData).filter(k => k !== 'Shipping_Status').every(k => formData[k] === booking?.[k])
@@ -288,7 +290,7 @@ function ManagerBookingPage() {
           fetchBookings();
           return;
         }
-        
+
         await axios.put(
           `http://localhost:3001/api/staff/booking/${editId}`,
           payload,
@@ -307,6 +309,7 @@ function ManagerBookingPage() {
     setUploadingId(bookingId);
     setEditId(null);
     setSelectedFile(null);
+    setTestResult(""); // Reset kết quả quan hệ huyết thống
   };
 
   const handleFileChange = (e) => {
@@ -319,9 +322,14 @@ function ManagerBookingPage() {
       alert("Vui lòng chọn một file PDF.");
       return;
     }
+    if (!testResult) {
+      alert("Vui lòng điền kết quả quan hệ huyết thống.");
+      return;
+    }
 
     const fileData = new FormData();
     fileData.append("resultPdf", selectedFile);
+    fileData.append("testResult", testResult); // Thêm kết quả quan hệ huyết thống
     setIsUploading(true);
 
     try {
@@ -340,6 +348,7 @@ function ManagerBookingPage() {
       );
       setUploadingId(null);
       setSelectedFile(null);
+      setTestResult(""); // Reset kết quả
       fetchBookings();
     } catch (err) {
       console.error(
@@ -429,8 +438,13 @@ function ManagerBookingPage() {
       alert("Vui lòng chọn một file PDF.");
       return;
     }
+    if (!testResult) {
+      alert("Vui lòng điền kết quả quan hệ huyết thống.");
+      return;
+    }
     const fileData = new FormData();
     fileData.append("resultPdf", selectedFile);
+    fileData.append("testResult", testResult); // Thêm kết quả quan hệ huyết thống
     setIsUploading(true);
     try {
       await axios.post(
@@ -445,6 +459,7 @@ function ManagerBookingPage() {
       );
       alert("Tải lên kết quả thành công. Trạng thái đã cập nhật thành 'Hoàn tất'.");
       setSelectedFile(null);
+      setTestResult(""); // Reset kết quả
       fetchBookings();
     } catch (err) {
       alert("Tải lên thất bại: " + (err.response?.data?.message || "Lỗi server"));
@@ -561,6 +576,19 @@ function ManagerBookingPage() {
           return (
             <form onSubmit={e => handleUploadResultPdf(e, booking.Booking_ID)} className="sample-form">
               <h3>Tải lên kết quả PDF cho #{booking.Booking_ID}</h3>
+
+              <label>Kết quả quan hệ huyết thống:</label>
+              <select
+                value={testResult}
+                onChange={(e) => setTestResult(e.target.value)}
+                required
+                style={{ marginBottom: '12px' }}
+              >
+                <option value="">-- Chọn kết quả --</option>
+                <option value="Có quan hệ huyết thống">Có quan hệ huyết thống</option>
+                <option value="Không có quan hệ huyết thống">Không có quan hệ huyết thống</option>
+              </select>
+
               <label>Chọn file PDF:</label>
               <input
                 type="file"
@@ -569,12 +597,15 @@ function ManagerBookingPage() {
                 required
               />
               <div className="form-buttons">
-                <button type="submit" disabled={isUploading || !selectedFile}>
+                <button type="submit" disabled={isUploading || !selectedFile || !testResult}>
                   {isUploading ? "Đang tải lên..." : "Tải lên & Hoàn tất"}
                 </button>
                 <button
                   type="button"
-                  onClick={() => setEditId(null)}
+                  onClick={() => {
+                    setEditId(null);
+                    setTestResult("");
+                  }}
                   disabled={isUploading}
                 >
                   Hủy
@@ -799,6 +830,20 @@ function ManagerBookingPage() {
             {booking.Booking_Status === "Đang xét nghiệm" && (
               <form onSubmit={e => handleUploadResultPdf(e, booking.Booking_ID)} className="sample-form">
                 <h3>Tải lên kết quả PDF cho #{booking.Booking_ID}</h3>
+
+                <label>Kết quả quan hệ huyết thống:</label>
+                <select
+                  value={testResult}
+                  onChange={(e) => setTestResult(e.target.value)}
+                  required
+                  className="test-result-select"
+                  style={{ marginBottom: '12px' }}
+                >
+                  <option value="">-- Chọn kết quả --</option>
+                  <option value="Có quan hệ huyết thống">Có quan hệ huyết thống</option>
+                  <option value="Không có quan hệ huyết thống">Không có quan hệ huyết thống</option>
+                </select>
+
                 <label>Chọn file PDF:</label>
                 <input
                   type="file"
@@ -807,12 +852,15 @@ function ManagerBookingPage() {
                   required
                 />
                 <div className="form-buttons">
-                  <button type="submit" disabled={isUploading || !selectedFile}>
+                  <button type="submit" disabled={isUploading || !selectedFile || !testResult}>
                     {isUploading ? "Đang tải lên..." : "Tải lên & Hoàn tất"}
                   </button>
                   <button
                     type="button"
-                    onClick={() => setUploadingId(null)}
+                    onClick={() => {
+                      setUploadingId(null);
+                      setTestResult("");
+                    }}
                     disabled={isUploading}
                   >
                     Hủy
@@ -851,6 +899,20 @@ function ManagerBookingPage() {
       {uploadingId && (
         <form onSubmit={handleUploadSubmit} className="sample-form">
           <h3>Tải lên kết quả PDF cho #{uploadingId}</h3>
+
+          <label>Kết quả quan hệ huyết thống:</label>
+          <select
+            value={testResult}
+            onChange={(e) => setTestResult(e.target.value)}
+            required
+            className="test-result-select"
+            style={{ marginBottom: '12px' }}
+          >
+            <option value="">-- Chọn kết quả --</option>
+            <option value="Có quan hệ huyết thống">Có quan hệ huyết thống</option>
+            <option value="Không có quan hệ huyết thống">Không có quan hệ huyết thống</option>
+          </select>
+
           <label>Chọn file PDF:</label>
           <input
             type="file"
@@ -859,12 +921,15 @@ function ManagerBookingPage() {
             required
           />
           <div className="form-buttons">
-            <button type="submit" disabled={isUploading || !selectedFile}>
+            <button type="submit" disabled={isUploading || !selectedFile || !testResult}>
               {isUploading ? "Đang tải lên..." : "Tải lên & Hoàn tất"}
             </button>
             <button
               type="button"
-              onClick={() => setUploadingId(null)}
+              onClick={() => {
+                setUploadingId(null);
+                setTestResult("");
+              }}
               disabled={isUploading}
             >
               Hủy
@@ -886,7 +951,7 @@ function ManagerBookingPage() {
             <th>Ngày nhận kết quả</th>
             <th>Trạng thái vận chuyển</th>
             <th>Hình thức nhận kết quả</th>
-            <th>Kết quả xét nghiệm(File PDF)</th>
+            <th>Kết quả xét nghiệm</th>
             <th>Ảnh check-in</th>
             <th>Đánh giá của khách</th>
             {currentUserRole === "Manager" && <th>Nhân viên phụ trách</th>}
@@ -930,15 +995,20 @@ function ManagerBookingPage() {
                 <td>{b.Shipping_Status || "-"}</td>
                 <td>{b.ReceiveResult || "-"}</td>
                 <td>
-                  {b.Result_PDF_URL ? (
-                    <a
-                      href={`http://localhost:3001${b.Result_PDF_URL}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {" "}
-                      Xem PDF{" "}
-                    </a>
+                  {b.TestResult ? (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', alignItems: 'center' }}>
+                      <div style={{ fontWeight: '600', color: '#28a745' }}>{b.TestResult}</div>
+                      {b.Result_PDF_URL && (
+                        <a
+                          href={`http://localhost:3001${b.Result_PDF_URL}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ fontSize: '0.9em', color: '#007bff', textDecoration: 'underline' }}
+                        >
+                          Xem PDF
+                        </a>
+                      )}
+                    </div>
                   ) : (
                     "Chưa có"
                   )}

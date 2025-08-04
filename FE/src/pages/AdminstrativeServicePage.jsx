@@ -48,7 +48,9 @@ const AdministrativeDNA = () => {
           Chi phí: Từ 3.000.000 VNĐ – 6.000.000 VNĐ tuỳ số lượng mẫu và mục đích
           pháp lý.
         </li>
-        
+        <li>
+          Thời gian trả kết quả: 3–7 ngày làm việc, có gói khẩn từ 24h – 48h.
+        </li>
       </ul>
 
       <h2 className="section-title">Lưu ý quan trọng</h2>

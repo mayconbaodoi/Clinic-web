@@ -87,6 +87,18 @@
   transition: border 0.2s;
 }
 
+/* Styling đặc biệt cho dropdown kết quả quan hệ huyết thống */
+.sample-form .test-result-select {
+  border: 2px solid var(--secondary-green);
+  background: #f8fff8;
+  font-weight: 600;
+}
+
+.sample-form .test-result-select:focus {
+  border: 2px solid var(--secondary-green);
+  box-shadow: 0 0 0 3px rgba(108, 192, 74, 0.1);
+}
+
 .sample-form input[type="file"] {
   width: 100%;
   padding: 8px 12px;
