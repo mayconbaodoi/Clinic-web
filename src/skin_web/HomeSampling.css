@@ -1,0 +1,56 @@
+.home-sampling-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fdfdfd;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: #2c3e50;
+}
+
+.home-sampling-form {
+    display: flex;
+    flex-direction: column;
+}
+
+    .home-sampling-form label {
+        margin-top: 1rem;
+        font-weight: 500;
+    }
+
+    .home-sampling-form input,
+    .home-sampling-form select,
+    .home-sampling-form textarea {
+        padding: 0.5rem;
+        margin-top: 0.3rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    .home-sampling-form textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
+
+    .home-sampling-form button {
+        margin-top: 2rem;
+        padding: 0.75rem;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .home-sampling-form button:hover {
+            background-color: #2980b9;
+        }
